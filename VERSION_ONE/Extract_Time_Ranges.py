@@ -1,6 +1,7 @@
 import wave, struct
 import cv2
 import numpy as np
+import math
 def bytes_to_int(bytes):
     result = 0
     for b in bytes:
@@ -41,7 +42,7 @@ while i<=length:
     a=time
     j=i
     ff=0
-    while data>15*avg and j<=length:
+    while data>25*avg and j<=length:
         ff=1
         waveData = waveFile.readframes(1)
         temp=bytes_to_int(waveData)
@@ -53,9 +54,9 @@ while i<=length:
         j+=1
     i=j
     b=i/fps
-    t=(a,b)
+    t=(math.floor(max(a-10,0)),math.ceil(min(b+10,12600)))
     if ff==1:
-        print(t,file=open("god_attempt7.txt","a"))
+        print(t,file=open("god_attempt10.txt","a"))
         time_ranges[0].append(t)
     i+=1
 ##for i in time_ranges[0]:
