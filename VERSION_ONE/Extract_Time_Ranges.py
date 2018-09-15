@@ -1,0 +1,65 @@
+import wave, struct
+import cv2
+import numpy as np
+def bytes_to_int(bytes):
+    result = 0
+    for b in bytes:
+        result = result * 256 + int(b)
+    return result
+
+waveFile = wave.open('main_audio.wav', 'r')
+
+length=waveFile.getnframes()
+avg=0.0
+sum=0.0
+fps=44100
+for i in range(0,length):
+    waveData = waveFile.readframes(1)
+    temp=bytes_to_int(waveData)
+    if temp!=0:
+        data=struct.unpack('<hh',waveData)[0]
+    else:
+        data=0
+    data=data*1.0
+    sum+=abs(data)
+avg=sum/length
+avg/=2
+print('average values calculated now finding ranges: ')
+print(avg)
+time_ranges=[[]]
+i=0
+#length=100000
+while i<=length:
+    waveData = waveFile.readframes(1)
+    temp=bytes_to_int(waveData)
+    if temp!=0:
+        data=struct.unpack('<hh',waveData)[0]
+    else:
+        data=0
+    data=data*1.0
+    time=i/fps
+    a=time
+    j=i
+    ff=0
+    while data>15*avg and j<=length:
+        ff=1
+        waveData = waveFile.readframes(1)
+        temp=bytes_to_int(waveData)
+        if temp!=0:
+            data=struct.unpack('<hh',waveData)[0]
+        else:
+            data=0
+        data=data*1.0
+        j+=1
+    i=j
+    b=i/fps
+    t=(a,b)
+    if ff==1:
+        print(t,file=open("god_attempt7.txt","a"))
+        time_ranges[0].append(t)
+    i+=1
+##for i in time_ranges[0]:
+##    print (i,file=open("god.txt", "a"))
+
+    
+    
