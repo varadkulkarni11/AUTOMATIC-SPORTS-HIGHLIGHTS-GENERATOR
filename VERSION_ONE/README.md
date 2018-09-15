@@ -6,4 +6,4 @@ We later used the amplitude levels of each audio frame and extracted the time ra
 The code for the above description can be found in 'Extract_Time_Ranges.py'
 
 Lastly, we used the time ranges and sliced the main match video, such that only the time ranges found in the previous code are extracted.
-Can be found in'final_v1_out.py'
+Can be found in 'final_v1_out.py'
