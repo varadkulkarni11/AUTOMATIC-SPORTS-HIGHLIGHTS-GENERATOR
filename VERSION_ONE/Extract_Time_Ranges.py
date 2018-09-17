@@ -2,6 +2,7 @@ import wave, struct
 import cv2
 import numpy as np
 import math
+
 def bytes_to_int(bytes):
     result = 0
     for b in bytes:
@@ -25,11 +26,10 @@ for i in range(0,length):
     sum+=abs(data)
 avg=sum/length
 avg/=2
+##avg=511.0
 print('average values calculated now finding ranges: ')
 print(avg)
-time_ranges=[[]]
 i=0
-#length=100000
 while i<=length:
     waveData = waveFile.readframes(1)
     temp=bytes_to_int(waveData)
@@ -57,10 +57,7 @@ while i<=length:
     t=(math.floor(max(a-10,0)),math.ceil(min(b+10,12600)))
     if ff==1:
         print(t,file=open("god_attempt10.txt","a"))
-        time_ranges[0].append(t)
     i+=1
-##for i in time_ranges[0]:
-##    print (i,file=open("god.txt", "a"))
 
     
     
