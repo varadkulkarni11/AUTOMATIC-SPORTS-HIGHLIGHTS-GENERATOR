@@ -16,7 +16,7 @@ waveFile = wave.open('main_audio.wav', 'r')
 
 length=waveFile.getnframes()
 avg=0.0
-##sum=0.0
+sum=0.0
 fps=44100
 z=0
 for i in range(0,length):
