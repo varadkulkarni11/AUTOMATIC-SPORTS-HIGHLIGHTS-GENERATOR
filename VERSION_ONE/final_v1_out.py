@@ -19,18 +19,17 @@ avg=0.0
 ##sum=0.0
 fps=44100
 z=0
-##for i in range(0,length):
-##    waveData = waveFile.readframes(1)
-##    temp=bytes_to_int(waveData)
-##    if temp!=0:
-##        data=struct.unpack('<hh',waveData)[0]
-##    else:
-##        data=0
-##    data=data*1.0
-##    sum+=abs(data)
-##avg=sum/length
-##avg/=2
-avg=511.0
+for i in range(0,length):
+    waveData = waveFile.readframes(1)
+    temp=bytes_to_int(waveData)
+    if temp!=0:
+        data=struct.unpack('<hh',waveData)[0]
+    else:
+        data=0
+    data=data*1.0
+    sum+=abs(data)
+avg=sum/length
+avg/=2
 while i<=length:
     waveData = waveFile.readframes(1)
     temp=bytes_to_int(waveData)
