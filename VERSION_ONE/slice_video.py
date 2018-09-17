@@ -16,6 +16,7 @@ length=waveFile.getnframes()
 avg=0.0
 sum=0.0
 fps=44100
+z=0
 for i in range(0,length):
     waveData = waveFile.readframes(1)
     temp=bytes_to_int(waveData)
@@ -56,21 +57,20 @@ while i<=length:
     i=j
     b=i/fps
     t=(math.floor(max(a-10,0)),math.ceil(min(b+10,12600)))
-    z=0
+    
     if ff==1:
-    		x,y=t
+    	x,y=t
         
         ss1=x%60
         mm1=x/60
         hh1=mm1/60
         mm1=mm1%60
-
-
+        
         ss2=y%60
         mm2=y/60
         hh2=mm2/60
         mm2=mm2%60
-
+        
         a='"'+str(hh1)+':'+str(mm1)+':'+str(ss1)+'"'
         b='"'+str(hh2)+':'+str(mm2)+':'+str(ss2)+'"'
         outputfilename="/temp/output"+str(z)+".mp4"
