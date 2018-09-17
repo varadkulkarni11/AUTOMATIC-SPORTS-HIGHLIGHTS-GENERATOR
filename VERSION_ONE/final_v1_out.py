@@ -30,6 +30,7 @@ for i in range(0,length):
     sum+=abs(data)
 avg=sum/length
 avg/=2
+i=0
 while i<=length:
     waveData = waveFile.readframes(1)
     temp=bytes_to_int(waveData)
