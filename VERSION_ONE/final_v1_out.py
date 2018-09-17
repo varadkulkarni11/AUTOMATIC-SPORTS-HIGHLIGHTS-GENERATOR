@@ -68,7 +68,6 @@ while i<=length:
         if z!=0:
             cmd = "ffmpeg -i D:/BEPROJECT/tempp/highlights.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts D:/BEPROJECT/tempp/highlights.ts"
             system(cmd)
-            print('merging')
             concat_str="D:/BEPROJECT/tempp/highlights.ts"+"|"+"D:/BEPROJECT/tempp/temp_video.ts"
             cmd=cmd = """ffmpeg -i "concat:{0}" -c copy -bsf:a aac_adtstoasc D:/BEPROJECT/tempp/main_out_temp.mp4""".format(concat_str)
             system(cmd)
@@ -77,7 +76,6 @@ while i<=length:
             os.remove("D:/BEPROJECT/tempp/temp_video.mp4")
             os.remove("D:/BEPROJECT/tempp/temp_video.ts")
             os.rename('D:/BEPROJECT/tempp/main_out_temp.mp4','D:/BEPROJECT/tempp/highlights.mp4')
-        print('slicing')
         z+=1
     i+=1
 
