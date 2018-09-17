@@ -57,7 +57,7 @@ while i<=length:
     i=j
     b=i/fps
     t=(math.floor(max(a-10,0)),math.ceil(min(b+10,12600)))
-    
+    z=0
     if ff==1:
     	x,y=t
         
