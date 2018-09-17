@@ -59,7 +59,6 @@ while i<=length:
     t=(math.floor(max(a-10,0)),math.ceil(min(b+10,12600)))
     if ff==1:
     	x,y=t
-        
         ss1=x%60
         mm1=x/60
         hh1=mm1/60
