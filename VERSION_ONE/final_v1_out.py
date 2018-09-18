@@ -18,6 +18,7 @@ length=waveFile.getnframes()
 avg=0.0
 sum=0.0
 fps=44100
+##CALCULATE AVERAGE AUDIO LEVEL OF ALL AUDIO FRAMES
 for i in range(0,length):
     waveData = waveFile.readframes(1)
     temp=bytes_to_int(waveData)
@@ -30,6 +31,8 @@ for i in range(0,length):
 avg=sum/length
 avg/=2
 i=0
+#GETTING TIME FRAMES WHERE AUDIO AMPLITUDE > THRESHHOLD
+thresh_hold=25*avg
 time_ranges=[]
 while i<=length:
     waveData = waveFile.readframes(1)
@@ -43,7 +46,7 @@ while i<=length:
     a=time
     j=i
     ff=0
-    while data>25*avg and j<=length:
+    while data>thresh_hold and j<=length:
         ff=1
         waveData = waveFile.readframes(1)
         temp=bytes_to_int(waveData)
@@ -58,9 +61,10 @@ while i<=length:
     t=(math.floor(max(a-10,0)),math.ceil(min(b+10,12600)))
     if ff==1:
         x,y=t
-        if x<y
+        if x<y :
             time_ranges.append(t)
     i+=1
+##MAKING TIME RANGES DISJOINT
 start_time=[0]*12601
 end_time=[0]*12601
 god=[0]*12601
@@ -92,6 +96,7 @@ while i<=12600:
     i=j
     i+=1
 max_idx=len(ranges)
+#SLICING VIDEO IN TIME RANGES AND THEN FINALLY MERGING TO GET FINAL VIDEO OUTPUT
 for i in range (0,max_idx):
     x,y=ranges[i]
     if i==0:
