@@ -18,6 +18,7 @@ length=waveFile.getnframes()
 avg=0.0
 sum=0.0
 fps=44100
+##CALCULATE AVERAGE AUDIO LEVEL OF ALL AUDIO FRAMES
 for i in range(0,length):
     waveData = waveFile.readframes(1)
     temp=bytes_to_int(waveData)
@@ -30,6 +31,7 @@ for i in range(0,length):
 avg=sum/length
 avg/=2
 i=0
+#GETTING TIME FRAMES WHERE AUDIO AMPLITUDE > THRESHHOLD
 thresh_hold=25*avg
 time_ranges=[]
 while i<=length:
@@ -62,6 +64,7 @@ while i<=length:
         if x<y :
             time_ranges.append(t)
     i+=1
+##MAKING TIME RANGES DISJOINT
 start_time=[0]*12601
 end_time=[0]*12601
 god=[0]*12601
