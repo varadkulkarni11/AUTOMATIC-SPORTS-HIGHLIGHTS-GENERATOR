@@ -5,4 +5,4 @@ This is a basic version of the model, in which only the difference between the a
 We later used the amplitude levels of each audio frame and extracted the time ranges in which the audio levels are above the average level of the total audio amplitudes
 The code for the above description can be found in 'v1_Extract_Time_Ranges.py'
 
-This creates a text file containing time frames in seconds
+This creates a text file containing time frames
