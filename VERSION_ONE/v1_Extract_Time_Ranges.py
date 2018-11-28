@@ -18,7 +18,8 @@ length=waveFile.getnframes()
 avg=0.0
 sum=0.0
 fps=44100
-##CALCULATE AVERAGE AUDIO LEVEL OF ALL AUDIO FRAMES
+
+CALCULATE AVERAGE AUDIO LEVEL OF ALL AUDIO FRAMES
 for i in range(0,length):
     waveData = waveFile.readframes(1)
     temp=bytes_to_int(waveData)
@@ -32,7 +33,7 @@ avg=sum/length
 avg/=2
 i=0
 #GETTING TIME FRAMES WHERE AUDIO AMPLITUDE > THRESHHOLD
-thresh_hold=25*avg
+thresh_hold=23*avg
 time_ranges=[]
 while i<=length:
     waveData = waveFile.readframes(1)
@@ -65,33 +66,33 @@ while i<=length:
             time_ranges.append(t)
     i+=1
 ##MAKING TIME RANGES DISJOINT
-start_time=[0]*12601
-end_time=[0]*12601
-god=[0]*12601
-max_idx=len(time_ranges)
-for i in range (0,max_idx):
-    x,y=time_ranges[i]
-    start_time[x]+=1
-    end_time[y]+=1
-cur=0
-c=0
-for i in range (0,12601):
-    if start_time[i]!=0:
-        cur+=1
-    if cur!=0:
-        god[i]=1
-    if end_time[i]!=0:
-        cur-=1
 ranges=[]
 i=0
-while i<=12600:
+sz=len(time_ranges)
+god =[0]*6901
+for i in time_ranges:
+    x,y=i
+    for j in range(x,y+1):
+        god[j]=1
+i=0
+while i<6901:
+    if god[i]==0:
+        i+=1
+        continue
+    st=i
     j=i
-    f=0
-    while god[j]==1 and j<12600:
-        j+=1
-        f=1
-    if f==1:
-        c+=1
-        ranges.append((i,j-1))
+    while god[j] and j<=6900:
+       j+=1
+    en=j
     i=j
     i+=1
+    ranges.append((st,en))
+max_idx=len(ranges)
+
+f=open('v1_time_ranges.txt','w')
+for i in ranges:
+    x,y=i
+    c=str(x)+' '+str(y)
+    f.write(c+'\n')
+f.close()
+
